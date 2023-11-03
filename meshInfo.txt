@@ -1,1 +1,0 @@
-{'ElementNames': ['Vertex', 'L2', 'T2', 'O2'], 'ElementNumber': [8, 120, 1536, 16563], 'FirstElementLine': [23698, 23726, 23978, 27062], 'LastElementLine': [23706, 23846, 25514, 43625], 'ElementTypes': 4, 'FirstIDLine': [23709, 23849, 25517, 43628], 'LastIDLine': [23717, 23969, 27053, 60191], 'Dimensions': 3, 'FirstNodesLine': 21, 'LastNodesLine': 23687}
