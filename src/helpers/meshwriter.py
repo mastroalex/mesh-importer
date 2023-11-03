@@ -7,12 +7,13 @@ def writeMesh(ids,lines,path):
     
     for l in range(ids["FirstNodesLine"],ids["LastNodesLine"]):    
         nodes.append(list(map(float, lines[l].split())))
-
+    
     for k in range(ids["ElementTypes"]):
         elements=[]
         IDs=[]
         for l in range(ids["FirstElementLine"][k],ids["LastElementLine"][k]):    
-            elements.append(list(map(float, lines[l].split())))
+            currentList=list(map(int, lines[l].split()))
+            elements.append([x+1 for x in currentList])
         m.writeElements(path,elements,ids,k)
        
         for l in range(ids["FirstIDLine"][k],ids["LastIDLine"][k]): 

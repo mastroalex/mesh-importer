@@ -3,13 +3,13 @@ import os
 def writeElements(path,elements,ids,k):
     f = open(path+'\\Elements_'+str(ids["ElementNames"][k])+'.txt', 'w')
     for i in range(1,len(elements)):
-        f.write(", ".join(map(str, elements[i]))+'\n')
+        f.write(" ".join(map(str, elements[i]))+'\n')
     f.close()
 
 def writeIDs(path,IDs,ids,k):
     f = open(path+'\\ID_'+str(ids["ElementNames"][k])+'.txt', 'w')
     for i in range(1,len(IDs)):
-        f.write(", ".join(map(str, IDs[i]))+'\n')
+        f.write(" ".join(map(str, IDs[i]))+'\n')
     f.close()
 
 def findDelimiter(lines):
@@ -29,7 +29,7 @@ def findDelimiter(lines):
         if "sdim" in lines[i]:
             ids["Dimensions"]=extractDigit(lines[i])
         if "Mesh vertex coordinates" in lines[i]:
-            ids["FirstNodesLine"]=i+1#element start following line
+            ids["FirstNodesLine"]=i+1
         if "#" in lines[i]:
             breaker.append(i)
         if "# number of element types" in lines[i]:
@@ -86,8 +86,8 @@ def extractDigit(string):
 
 def writeNodes(path,nodes):
     f = open(path+'\\nodes.txt', 'w')
-    for i in range(1,len(nodes)):
-        f.write(", ".join(map(str, nodes[i]))+'\n')
+    for i in range(len(nodes)):
+        f.write(" ".join(map(str, nodes[i]))+'\n')
     f.close()
 
 def findLastLineOfInterest(breaker,firstLine):

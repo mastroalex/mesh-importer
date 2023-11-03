@@ -9,10 +9,12 @@ def main():
 
     with open(path+fileName) as f:
         lines = f.readlines()
-
-    ids=m.findDelimiter(lines)
-    print(ids)    
     
+    ids=m.findDelimiter(lines)
+
+    print(lines[ids["FirstNodesLine"]])
+    print(ids)    
+
     w.writeMesh(ids,lines,path)
 
 
