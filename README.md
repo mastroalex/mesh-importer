@@ -37,9 +37,8 @@ It is possibile to integrate it directly into Mathematica using the `ExternalEva
 ```mathematica
 ExternalEvaluate["Shell", "cd " <> NotebookDirectory[] <> "\n git clone \ https://github.com/mastroalex/mesh-importer.git "]
 py = "C:/Users/bigba/AppData/Local/Programs/Python/Python310/python.exe";
-meshPath ="C:/mesh/path/to/mesh.mphtxt";
-meshOutput = 
-  "C:/mesh/output/path";
+meshPath = "C:/mesh/path/to/mesh.mphtxt";
+meshOutput = "C:/mesh/output/path";
 ExternalEvaluate["Shell", py <> " " <> NotebookDirectory[] <> "/mesh-importer/meshConversion.py" <> " " <> meshPath <> " " <>   meshOutput]
 ```
 
