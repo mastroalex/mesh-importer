@@ -1,6 +1,25 @@
 import os
 import src.helpers.meshimporter as m
 
+def writeElements(path,elements,ids,k):
+    currentPath=path+'Elements_'+str(ids["ElementNames"][k])+'.txt'
+    os.makedirs(os.path.dirname(currentPath), exist_ok=True)
+    f = open(currentPath, 'w')
+    for i in range(1,len(elements)):
+        f.write(" ".join(map(str, elements[i]))+'\n')
+    f.close()
+
+def writeIDs(path,IDs,ids,k):
+    f = open(path+'ID_'+str(ids["ElementNames"][k])+'.txt', 'w')
+    for i in range(1,len(IDs)):
+        f.write(" ".join(map(str, IDs[i]))+'\n')
+    f.close()
+
+def writeNodes(path,nodes):
+    f = open(path+'nodes.txt', 'w')
+    for i in range(len(nodes)):
+        f.write(" ".join(map(str, nodes[i]))+'\n')
+    f.close()
 
 def writeMesh(ids,lines,path):
     nodes=[]
@@ -14,13 +33,13 @@ def writeMesh(ids,lines,path):
         for l in range(ids["FirstElementLine"][k],ids["LastElementLine"][k]):    
             currentList=list(map(int, lines[l].split()))
             elements.append([x+1 for x in currentList])
-        m.writeElements(path,elements,ids,k)
+        writeElements(path,elements,ids,k)
        
         for l in range(ids["FirstIDLine"][k],ids["LastIDLine"][k]): 
             IDs.append(list(map(int, lines[l].split())))
-        m.writeIDs(path,IDs,ids,k)
-    m.writeNodes(path,nodes)
+        writeIDs(path,IDs,ids,k)
+    writeNodes(path,nodes)
 
-    f = open(path+'\\meshInfo.txt', 'w')
+    f = open(path+'meshInfo.txt', 'w')
     f.write(str(ids)+'\n')
     f.close()

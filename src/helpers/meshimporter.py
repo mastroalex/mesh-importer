@@ -1,21 +1,7 @@
 import os
 
-def writeElements(path,elements,ids,k):
-    f = open(path+'\\Elements_'+str(ids["ElementNames"][k])+'.txt', 'w')
-    for i in range(1,len(elements)):
-        f.write(" ".join(map(str, elements[i]))+'\n')
-    f.close()
-
-def writeIDs(path,IDs,ids,k):
-    f = open(path+'\\ID_'+str(ids["ElementNames"][k])+'.txt', 'w')
-    for i in range(1,len(IDs)):
-        f.write(" ".join(map(str, IDs[i]))+'\n')
-    f.close()
-
 def findDelimiter(lines):
-    # loop over the different properties described by a dictionary
-    # complete the different step for ids{}
-    # return ids
+    # define usefull properties
     breaker=[]
     ids={}
     ids["ElementNames"]=[]
@@ -25,19 +11,30 @@ def findDelimiter(lines):
     ids["ElementTypes"]=0
     ids["FirstIDLine"]=[]
     ids["LastIDLine"]=[]
+
     for i in range(len(lines)):
+        # read mesh dimension
         if "sdim" in lines[i]:
             ids["Dimensions"]=extractDigit(lines[i])
+        # find first node row
         if "Mesh vertex coordinates" in lines[i]:
-            ids["FirstNodesLine"]=i+1
+            ids["FirstNodesLine"]=i+1# nodes start next row (+1)
+        # all '#' symbol correspond to a section break
         if "#" in lines[i]:
             breaker.append(i)
         if "# number of element types" in lines[i]:
             ids["ElementTypes"]=extractDigit(lines[i])
-  
+
+        # each element type section contains the same structure:
+        # Each row like '# Type k' marks the starting point for the kth section
+        # Each section contains:
+        # - Element name
+        # - Number of element
+        # - Several row for all the elements
+        # marked by the corresponding string
+
         if "# Type" in lines[i]:
             for k in range(ids["ElementTypes"]):
-                #print(extractDigit(lines[i].replace("#","")))
                 if extractDigit(lines[i].replace("#",""))==k:
                    for j in range(8):
                         if "# type name" in lines[i+j]:
@@ -49,7 +46,9 @@ def findDelimiter(lines):
         if "# Geometric entity indices" in lines[i]:
             ids["FirstIDLine"].append(i+1)
 
+    # findLastLineOfInterest() helps to find the last row for the elements list
     for k in range(len(ids["FirstIDLine"])):
+        
         ids["LastIDLine"].append(findLastLineOfInterest(breaker,ids["FirstIDLine"][k]))
 
     lastNode=findLastLineOfInterest(breaker,ids["FirstNodesLine"])
@@ -77,18 +76,13 @@ def elementName(string):
 
 
 def extractDigit(string):
+    # extract number from complex strings including text and number
     num=""
     for s in string.split():
                 if s.isdigit():
                     num=int(s)
     return num
 
-
-def writeNodes(path,nodes):
-    f = open(path+'\\nodes.txt', 'w')
-    for i in range(len(nodes)):
-        f.write(" ".join(map(str, nodes[i]))+'\n')
-    f.close()
 
 def findLastLineOfInterest(breaker,firstLine):
     value=[]
