@@ -24,7 +24,7 @@ def main(argv):
     elif len(argv)==2:
         # read mesh path and output path
         meshToRead = argv[0]
-        meshToExportPath = argv[1]
+        meshToExportPath = argv[1]+'\\'
 
     else:
         exit(1)      
