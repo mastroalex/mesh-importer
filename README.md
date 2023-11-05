@@ -36,4 +36,44 @@ It is possibile to integrate it directly into Mathematica using the `ExternalEva
 
 ```mathematica
 ExternalEvaluate["Shell", "cd " <> NotebookDirectory[] <> "\n git clone \ https://github.com/mastroalex/mesh-importer.git "]
+py = "C:/Users/bigba/AppData/Local/Programs/Python/Python310/python.exe";
+meshPath ="C:/mesh/path/to/mesh.mphtxt";
+meshOutput = 
+  "C:/mesh/output/path";
+ExternalEvaluate["Shell", py <> " " <> NotebookDirectory[] <> "/mesh-importer/meshConversion.py" <> " " <> meshPath <> " " <>   meshOutput]
 ```
+
+### Load and visualize
+
+Example to load tetrahedral quadratic mesh with O2 elements:
+
+```mathematica
+nodes = Import[meshOutput <> "\\nodes.txt", "Table"];
+connectivity = Import[meshOutput <> "\\Elements_O2.txt", "Table"];
+```
+
+#### Built-in 
+
+Create and visualize mesh: 
+
+```mathematica
+Needs["NDSolve`FEM`"]
+mesh = ToElementMesh["Coordinates" -> nodes, "MeshElements" -> {TetrahedronElement[connectivity[[All, {1, 2, 4, 3}]]]}]
+mesh["Wireframe"]
+```
+
+![Alt text](image.png)
+
+
+#### AceFEM
+
+```mathematica
+<< AceFEM`;
+SMTInputData[];
+SMTAddDomain[{"\[CapitalOmega]c", "O2P1Y", {}}];
+SMTAddMesh[  nodes, {"\[CapitalOmega]c" -> connectivity[[All, {1, 2, 4, 3, 5, 9, 8, 6, 7, 10}]]}];
+SMTAnalysis[];
+SMTShowMesh["DeformedMesh" -> False, "Field" -> None]
+```
+
+![Alt text](image.png)
