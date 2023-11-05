@@ -62,7 +62,7 @@ mesh = ToElementMesh["Coordinates" -> nodes, "MeshElements" -> {TetrahedronEleme
 mesh["Wireframe"]
 ```
 
-![Alt text](https://github.com/mastroalex/mesh-importer/blob/main/data/mesh1.png)
+![Alt text](data/mesh1.png)
 
 
 #### AceFEM
@@ -76,7 +76,7 @@ SMTAnalysis[];
 SMTShowMesh["DeformedMesh" -> False, "Field" -> None]
 ```
 
-![Alt text](https://github.com/mastroalex/mesh-importer/blob/main/data/mesh2.png)
+![Alt text](data/mesh2.png)
 
 ---
 
