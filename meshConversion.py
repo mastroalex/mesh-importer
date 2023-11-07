@@ -34,9 +34,15 @@ def main(argv):
     
     ids=m.findDelimiter(lines)
 
-    for lin in ids:
+    #for k in ids["LastElementLine"]:
+    #    print("Minus:")
+    #    print(lines[k-1])
+    #    print("Actual:")
+    #    print(lines[k])
+    
+    #for lin in ids:
         # print mesh properties
-        print(lin+": "+str(ids[lin]))
+    #    print(lin+": "+str(ids[lin]))
 
     # write .txt files
     w.writeMesh(ids,lines,meshToExportPath)
