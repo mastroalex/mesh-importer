@@ -4,7 +4,7 @@ def mapConnectivity(array):
     # it maps different connectivity schema
     newarray=[]
     if len(array)==6:
-        newarray=[array[0], array[1], array[2], array[3], array[4], array[5]]
+        newarray=[array[0], array[1], array[2], array[3], array[5], array[4]]
     elif len(array)==10:
         newarray=[array[0], array[1], array[3], array[2], array[4], array[8], array[7], array[5], array[6], array[9]]
     else:
