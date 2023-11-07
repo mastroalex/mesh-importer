@@ -70,7 +70,7 @@ mesh["Wireframe"]
 << AceFEM`;
 SMTInputData[];
 SMTAddDomain[{"\[CapitalOmega]c", "O2P1Y", {}}];
-SMTAddMesh[  nodes, {"\[CapitalOmega]c" -> connectivity[[All, {1, 2, 4, 3, 5, 9, 8, 6, 7, 10}]]}];
+SMTAddMesh[  nodes, {"\[CapitalOmega]c" -> connectivity}];
 SMTAnalysis[];
 SMTShowMesh["DeformedMesh" -> False, "Field" -> None]
 ```
