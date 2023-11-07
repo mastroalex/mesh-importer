@@ -36,7 +36,8 @@ def writeMesh(ids,lines,path):
         writeElements(path,elements,ids,k)
        
         for l in range(ids["FirstIDLine"][k],ids["LastIDLine"][k]): 
-            IDs.append(list(map(int, lines[l].split())))
+            currentList=list(map(int, lines[l].split()))
+            IDs.append(currentList)# +1 because indexes in mathematica starts from 1
         writeIDs(path,IDs,ids,k)
     writeNodes(path,nodes)
 
