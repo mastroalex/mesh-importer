@@ -6,7 +6,7 @@ def writeElements(path,elements,ids,k):
     os.makedirs(os.path.dirname(currentPath), exist_ok=True)
     f = open(currentPath, 'w')
     for i in range(1,len(elements)):
-        f.write(" ".join(map(str, elements[i]))+'\n')
+        f.write(" ".join(map(str, m.mapConnectivity(elements[i])))+'\n')
     f.close()
 
 def writeIDs(path,IDs,ids,k):
@@ -18,7 +18,7 @@ def writeIDs(path,IDs,ids,k):
 def writeNodes(path,nodes):
     f = open(path+'nodes.txt', 'w')
     for i in range(len(nodes)):
-        f.write(" ".join(map(str, nodes[i]))+'\n')
+        f.write(" ".join(map(str, m.mapConnectivity(nodes[i])))+'\n')
     f.close()
 
 def writeMesh(ids,lines,path):
