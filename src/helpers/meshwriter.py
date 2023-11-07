@@ -11,7 +11,7 @@ def writeElements(path,elements,ids,k):
 
 def writeIDs(path,IDs,ids,k):
     f = open(path+'ID_'+str(ids["ElementNames"][k])+'.txt', 'w')
-    for i in range(1,len(IDs)):
+    for i in range(len(IDs)):
         f.write(" ".join(map(str, IDs[i]))+'\n')
     f.close()
 
